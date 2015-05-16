@@ -6,6 +6,14 @@
 
 using namespace std;
 
+
+/**@fn  IdHeap: middle man function to replace new. Dynamically allocates a version of the input variable. ...
+        Tags input variable
+ * @param heap_variable: the variable to be Dynamically allocated and tagged
+ * @param tags: vector of tags
+ * @param line_number: line number variable was created on
+ * @return heap_return: pointer to variable created
+*/
 template <class C>
 C* IdHeap(C heap_variable, string variable_name, vector<Tag> &tags, long long line_number) {
 
@@ -23,6 +31,11 @@ C* IdHeap(C heap_variable, string variable_name, vector<Tag> &tags, long long li
     return heap_return;
 }
 
+/**@fn  IdStack: Tags input variable
+ * @param stack_variable: the variable to be tagged
+ * @param tags: vector of tags
+ * @param line_number: line number variable was created on
+*/
 template <class C>
 void IdStack(C stack_variable, string variable_name, vector<Tag> &tags, long long line_number) {
 
