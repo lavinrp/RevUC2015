@@ -1,27 +1,27 @@
 #include "tag.h"
 
-Tag::Tag(void* Tptr,string Varname, long long Linenumber) {
+Tag::Tag(void* tptr, string var_name, long long line_number) {
 
-            this -> Tptr = Tptr;
+            this -> tptr = tptr;
 
-            Size = sizeof(&Tptr);
+            size = sizeof(&tptr);
 
-            VarName.push_back(Varname);
+            var_names.push_back(var_name);
 
-            Line.push_back(Linenumber);  //ctor
+            lines.push_back(line_number);  //ctor
 
 }
 
 Tag::~Tag() {
 
-    Tptr = NULL;    //dtor
+    tptr = NULL;    //dtor
 }
 
-void Tag::update(string Varname, long long Linenumber) {
+void Tag::update(string var_name, long long line_number) {
 
-    Size = sizeof(&Tptr);
+    size = sizeof(&tptr);
 
-    VarName.push_back(Varname);
+    var_names.push_back(var_name);
 
-    Line.push_back(Linenumber);
+    lines.push_back(line_number);
 }

@@ -11,7 +11,7 @@ using namespace std;
 class Tag
 {
     public:
-        Tag(void* Tptr, string VarName,long long Line);
+        Tag(void* tptr, string var_name,long long line);
 
         virtual ~Tag();
 
@@ -19,24 +19,24 @@ class Tag
 
         void setVar();
 
-        void setLine();
+        void setLines();
 
         string getVarName();
 
         long getSize();
 
-        long long getLine();
+        long long getLines();
 
-        void update(string Varname, long long Linenumber);
+        void update(string var_name, long long line_number);
 
     protected:
 
 
     private:
-        void* Tptr;
-        long Size;
-        vector<string> VarName;
-        vector<long long>Line;
+        void* tptr;
+        long size;
+        vector<string> var_names;
+        vector<long long>lines;
 
 
 
