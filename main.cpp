@@ -49,8 +49,13 @@ void IdStack(C stack_variable, string variable_name, vector<Tag> &tags, long lon
     tags.push_back(stack_tag);
 }
 
+struct FilenameEssentials{      ///struct so that we can return more than one thing because i'm uncreative
+    vector<string> files;
+    string path;
+    vector<string> full_path;
+};
 
-vector<string> GetFileNames(){
+struct FilenameEssentials GetFileNames(){
 
     ///FINDS THE FILES TO BE PROCESSED///
     string file_path;
@@ -90,21 +95,29 @@ vector<string> GetFileNames(){
     }
     ///concatenates the file names to the ends of the path to the folder
 
+    FilenameEssentials our_files;
+    our_files.files=selected_files;
+    our_files.path=file_path;
+    for(unsigned int k=0; k<selected_files.size(); k++){
+        our_files.full_path.push_back(file_path+selected_files[k]);
+    }
+
     for(unsigned int k=0; k<selected_files.size(); k++){
         selected_files[k]=file_path + "\\" + selected_files[k];
         cout<<selected_files[k]<<endl;
     }
-    return selected_files;
+    our_files.full_path=selected_files;
+    return our_files;
 }
 
 
 
 vector<vector<string>> FileConverter(vector<string> selected_files){
-    cout<<"Files will now be converted"<<endl;
+    cout<<"Files will now be converted..."<<endl;
     string temp_line;
     vector<vector<string>> converted_files;
     vector<string> temp_file;
-    for(unsigned int k=0; k<selected_files.size(); k++){
+    for(unsigned int k=0; k<selected_files.size(); k++){  ///Copies the files contents as text and puts it in a vector.
         ifstream current_file(selected_files[k]);
         while(getline(current_file, temp_line)){
             temp_file.push_back(temp_line);
@@ -115,21 +128,36 @@ vector<vector<string>> FileConverter(vector<string> selected_files){
 }
 
 
-void FileOutputter(vector<vector<string>> converted_files){
-
+void FileOutputter(vector<vector<string>> tagged_files, FilenameEssentials file_names){
+    vector<string> new_names=file_names.files;
+    for(unsigned int k=0; k<new_names.size(); k++){
+        new_names[k]=file_names.path+"\\_"+new_names[k];
+    }
+    cout<<endl<<"The following files were outputted.  Please compile them and run them to check for the location of memory leaks."<<endl;
+    for(unsigned int k=0; k<new_names.size(); k++){
+        ofstream new_file(new_names[k]);
+        cout<<new_names[k]<<endl;
+        for(unsigned int j=0; j<tagged_files[k].size(); j++){
+            new_file << tagged_files[k][j]+"\n";
+        }
+    }
+    return;
 }
 
 
 
 int main() {
-    vector<string> selected_files=GetFileNames();
+    FilenameEssentials file_info=GetFileNames();
+    vector<string> selected_files=file_info.full_path;
     vector<vector<string>> converted_files=FileConverter(selected_files);
-
-    for(int k=0; k<converted_files.size(); k++){
+    ///insert tags and whatnot
+    FileOutputter(converted_files, file_info);
+/*    for(int k=0; k<converted_files.size(); k++){              ///FILE PRINTER
         for(int j=0; j<converted_files[k].size(); j++){
             cout<<converted_files[k][j]<<endl;
         }
-    }
+        cout<<"////////////////////////////////////////////////////////////////////////////////"<<endl;
+    }*/
 
     ///return newly created pointer
     return 0;
