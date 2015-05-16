@@ -116,12 +116,20 @@ vector<vector<string>> FileConverter(vector<string> selected_files){
 
 
 void FileOutputter(vector<vector<string>> converted_files){
+
 }
 
 
 
 int main() {
+    vector<string> selected_files=GetFileNames();
+    vector<vector<string>> converted_files=FileConverter(selected_files);
 
+    for(int k=0; k<converted_files.size(); k++){
+        for(int j=0; j<converted_files[k].size(); j++){
+            cout<<converted_files[k][j]<<endl;
+        }
+    }
 
     ///return newly created pointer
     return 0;
