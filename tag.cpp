@@ -12,11 +12,10 @@ Tag::Tag(void* Tptr,string Varname, long long Linenumber) {
 
 }
 
-///TODO: (Ryan or Ryan) fix dtor
-/*Tag::~Tag() {
+Tag::~Tag() {
 
-    //Tptr = NULL;    //dtor
-}*/
+    Tptr = NULL;    //dtor
+}
 
 void Tag::update(string Varname, long long Linenumber) {
 
