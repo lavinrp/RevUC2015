@@ -23,7 +23,7 @@ class Tag
 
         string getVarName();
 
-        long getSize();
+        //long getSize();
 
         long long getLines();
 
@@ -34,11 +34,10 @@ class Tag
 
     private:
         void* tptr;
-        long size;
+        ///TODO: (anyone) find way to accurately determine size
+        //long size;
         vector<string> var_names;
         vector<long long>lines;
-
-
 
 };
 

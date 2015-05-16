@@ -4,7 +4,7 @@ Tag::Tag(void* tptr, string var_name, long long line_number) {
 
             this -> tptr = tptr;
 
-            size = sizeof(&tptr);
+            //size = sizeof(&tptr);
 
             var_names.push_back(var_name);
 
@@ -19,7 +19,7 @@ Tag::~Tag() {
 
 void Tag::update(string var_name, long long line_number) {
 
-    size = sizeof(&tptr);
+    //size = sizeof(&tptr);
 
     var_names.push_back(var_name);
 
