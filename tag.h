@@ -1,15 +1,19 @@
 #ifndef TAG_H
 #define TAG_H
+
 #include <vector>
+#include <string>
+
+using namespace std;
 
 ///  The Tag class tags a variable for trace. It takes 4 arguments, the variable's pointer, value, name, and line number.
 
 class Tag
 {
     public:
-        tag(void* Tptr, string VarName,long long Line);
+        Tag(void* Tptr, string VarName,long long Line);
 
-        virtual ~tag();
+        virtual ~Tag();
 
         void setVarName();
 
@@ -23,7 +27,7 @@ class Tag
 
         long long getLine();
 
-        long long update();
+        void update(string Varname, long long Linenumber);
 
     protected:
 

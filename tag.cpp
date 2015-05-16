@@ -1,31 +1,28 @@
 #include "tag.h"
 
-tag::tag(void* Tptr,string Varname, long long Linenumber) {
+Tag::Tag(void* Tptr,string Varname, long long Linenumber) {
 
             this -> Tptr = Tptr;
 
             Size = sizeof(&Tptr);
 
-            Varname = VarName;
+            VarName.push_back(Varname);
 
             Line.push_back(Linenumber);  //ctor
 
 }
 
-tag::~tag() {
+///TODO: (Ryan or Ryan) fix dtor
+/*Tag::~Tag() {
 
-    Tptr = NULL;    //dtor
-}
+    //Tptr = NULL;    //dtor
+}*/
 
-tag::update(string Varname, long long Linenumber) {
-
-    int count = 0;
+void Tag::update(string Varname, long long Linenumber) {
 
     Size = sizeof(&Tptr);
 
     VarName.push_back(Varname);
 
     Line.push_back(Linenumber);
-
-
 }
