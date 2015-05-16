@@ -1,4 +1,8 @@
 #include "CodeScanObject.h"
+#include <iostream>
+#include <string>
+
+using namespace std;
 
 CodeScanObject::CodeScanObject()
 {
@@ -28,7 +32,7 @@ void CodeScanObject::findNewKeyword() {
             string var_construct = CopyVarAfterNew(newPosition);
 
             ///replace new with IdHeap function
-            code_string.replace(newPosition, + var_construct.length(), "IdHeap("+var_construct+")");
+            code_string.replace(newPosition,newPosition + var_construct.length(), "IdHeap("+var_construct+")");
         }
     }
 }
@@ -41,8 +45,9 @@ string CodeScanObject::CopyVarAfterNew(unsigned int newPosition) {
 
     for (unsigned int i = idx; i < code_string.length(); ++i) {
         if (code_string[i] == ';') {
-            unsigned int cut_length = i - idx - 1;
+            unsigned int cut_length = i - idx;
             string copiedVar = code_string.substr(idx, cut_length);
+            cout << copiedVar << endl;
             return copiedVar;
         }
     }
@@ -53,10 +58,10 @@ string CodeScanObject::CopyVarAfterNew(unsigned int newPosition) {
 ///input index of first letter of "new"
 bool CodeScanObject::isLoneNew(unsigned int index) {
     index--;
-    if (code_string[index + 1] == 0 || code_string[index] == ' ' || code_string[index] == '\n' || code_string[index] == '=') {
+    if (index + 1 == 0 || code_string[index] == ' ' || code_string[index] == '\n' || code_string[index] == '=') {
         ///move index to the end of new
         index+=4;
-        if (code_string[index == 0] || code_string[index] == ' ' || code_string[index] == '\n') {
+        if (index == code_string.length() || code_string[index] == ' ' || code_string[index] == '\n') {
             return true;
         }
     }
