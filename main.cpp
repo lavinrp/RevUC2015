@@ -5,6 +5,7 @@
 #include "tag.h"
 #include<dirent.h>
 #include<fstream>
+#include "CodeScanObject.h"
 
 using namespace std;
 
@@ -120,7 +121,31 @@ void FileOutputter(vector<vector<string>> converted_files){
 
 
 
+string FindReplaceNew(string in_string, vector<string> lines) {
+
+    ///replace new for every string
+    ///holds each line
+    string s;
+    string str_to_replace = "new";
+    for (unsigned int i = 0; i < lines.size(); ++i) {
+        s = lines[i];
+        ///replace all news with IdHeap(
+        s.replace(s.find(str_to_replace), str_to_replace.length(), "IdHeap(");
+
+
+        ///close the parentheses
+
+    }
+}
+
 int main() {
+
+    string testCode = "string s = new string()";
+
+
+    CodeScanObject cs(testCode);
+    cs.findNewKeyword();
+    cout << cs.code_string << endl;
 
 
     ///return newly created pointer
