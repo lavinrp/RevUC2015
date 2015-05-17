@@ -152,18 +152,23 @@ string SemicolonExcision(string valuables){
 }
 
 int main() {
+
+
+    ///read in files
     FilenameEssentials file_info=GetFileNames();
     vector<string> selected_files=file_info.full_path;
     vector<vector<string>> converted_files=FileConverter(selected_files);
-    ///insert tags and whatnot
 
+    ///insert tags and whatnot
+    ///create output file
     FileOutputter(converted_files, file_info);
-/*    for(int k=0; k<converted_files.size(); k++){              ///FILE PRINTER
-        for(int j=0; j<converted_files[k].size(); j++){
-            cout<<converted_files[k][j]<<endl;
-        }
-        cout<<"////////////////////////////////////////////////////////////////////////////////"<<endl;
-    }*/
+
+    //string sample = "asdaf var v = new var(sample); asfdsg Hi Hello /n b=new bar(docte); sdfsadf";
+	string sample("asdaf var v = new var(sample); \n asfdsg Hi Hello \n b=new bar(docte); sdfsadf \n var b = new bre(sample); ");
+	FindHeapVariables(sample);
+
+	cin.ignore();
+	cin.get();
 
     ///return newly created pointer
     return 0;
