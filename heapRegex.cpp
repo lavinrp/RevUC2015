@@ -16,7 +16,6 @@ public:
 		this->variableString = variableString;
 
 		this->variableLocation = variableLocation;
-
 	}
 
 	string getVariableString(){
@@ -57,7 +56,8 @@ vector<variableObject> FindHeapVariables(string input){
 
 	bool firstLoopTrigger = false;
 
-	regex heapVariableRegEx("\\bnew\\b(.|\\n)*?(?=;)");
+	///regex heapVariableRegEx("\\bnew\\b(.|\\n)*?(?=;)");
+	regex heapVariableRegEx("([a-zA-Z0-9])*?( )*?(=)*?( )*?new( )*?([a-zA-Z0-9]+)(\\((.*)\\))?( )*?(?=;)");
 
 	while (regex_search(input, match, heapVariableRegEx)){
 	
