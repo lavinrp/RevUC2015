@@ -145,12 +145,18 @@ void FileOutputter(vector<vector<string>> tagged_files, FilenameEssentials file_
 }
 
 
+string SemicolonExcision(string valuables){
+    valuables.pop_back();
+    string treasures=valuables;
+    return treasures;
+}
 
 int main() {
     FilenameEssentials file_info=GetFileNames();
     vector<string> selected_files=file_info.full_path;
     vector<vector<string>> converted_files=FileConverter(selected_files);
     ///insert tags and whatnot
+
     FileOutputter(converted_files, file_info);
 /*    for(int k=0; k<converted_files.size(); k++){              ///FILE PRINTER
         for(int j=0; j<converted_files[k].size(); j++){
