@@ -145,14 +145,3 @@ vector<variableObject> FindHeapVariables(string input){
 }
 
 
-int main(){
-
-	//string sample = "asdaf var v = new var(sample); asfdsg Hi Hello /n b=new bar(docte); sdfsadf";
-	string sample("asdaf var v = new var(sample); \n asfdsg Hi Hello \n b=new bar(docte); sdfsadf \n var b = new bre(sample); ");
-	FindHeapVariables(sample);
-
-	cin.ignore();
-	cin.get();
-
-}
-

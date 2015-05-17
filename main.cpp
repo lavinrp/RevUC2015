@@ -5,6 +5,7 @@
 #include "tag.h"
 #include<dirent.h>
 #include<fstream>
+#include "heapRegex.h"
 
 using namespace std;
 
@@ -162,6 +163,15 @@ int main() {
     ///insert tags and whatnot
     ///create output file
     FileOutputter(converted_files, file_info);
+
+
+    ///create tracking vectors
+    vector <Tag> heapTags;
+
+    ///parse every line of every file
+    //for (unsigned int i = 0; i < )
+
+
 
     //string sample = "asdaf var v = new var(sample); asfdsg Hi Hello /n b=new bar(docte); sdfsadf";
 	string sample("asdaf var v = new var(sample); \n asfdsg Hi Hello \n b=new bar(docte); sdfsadf \n var b = new bre(sample); ");
