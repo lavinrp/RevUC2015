@@ -169,13 +169,25 @@ int main() {
     vector <Tag> heapTags;
 
     ///parse every line of every file
-    //for (unsigned int i = 0; i < )
+    vector<variableObject> heap_strings;///store strings of heap variables
+    vector<VariableInfo> InfoExtractor;
 
-
+    for (vector<string> lines : converted_files) {
+        for (string line : lines) {
+            ///find all the new shits
+            vector<VariableInfo> selected_info = FindHeapVariables(line);
+        }
+    }
+    /*for (unsigned int i = 0; i < converted_files.size(); ++i) {
+        for (unsigned int k = 0; k < (converted_files[i]).size(); ++k) {
+            ///aquite alll s
+            heap_strings.push_back(FindHeapVariables((converted_files[i])[k]));
+        }
+    }*/
 
     //string sample = "asdaf var v = new var(sample); asfdsg Hi Hello /n b=new bar(docte); sdfsadf";
 	string sample("asdaf var v = new var(sample); \n asfdsg Hi Hello \n b=new bar(docte); sdfsadf \n var b = new bre(sample); ");
-	FindHeapVariables(sample);
+
 
 	cin.ignore();
 	cin.get();

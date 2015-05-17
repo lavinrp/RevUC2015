@@ -81,7 +81,7 @@ vector<VariableInfo> InfoExtractor(vector<variableObject> ObjectCaravan){
 -params - string input : single line of code
 - returns - the vector of type variableObject
 */
-vector<variableObject> FindHeapVariables(string input){
+vector<VariableInfo> FindHeapVariables(string input){
 
 	//regex string match
 	smatch match;
@@ -141,7 +141,7 @@ vector<variableObject> FindHeapVariables(string input){
 		cout << heapVarVector[vb].getVariableLocation() << "   " << heapVarVector[vb].getVariableString() << endl;
 	}
 
-	return heapVarVector;
+    vector<VariableInfo> ThePieces=InfoExtractor(heapVarVector);
+	return ThePieces;
 }
-
 
