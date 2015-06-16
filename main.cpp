@@ -172,10 +172,37 @@ int main() {
     vector<variableObject> heap_strings;///store strings of heap variables
     vector<VariableInfo> InfoExtractor;
 
-    for (vector<string> lines : converted_files) {
-        for (string line : lines) {
+    //for (vector<string> lines : converted_files) {
+    for (unsigned int i = 0; i < converted_files.size(); ++i) {
+        vector<string>lines = converted_files[i];
+        //for (string line : lines) {
+        for (unsigned int k = 0; k < lines.size(); ++k) {
+            string line = lines[k];
             ///find all the new shits
-            vector<VariableInfo> selected_info = FindHeapVariables(line);
+            //vector<VariableInfo> selected_info = FindHeapVariables(line);
+            vector<string> selected_info = FindHeapVariables(line);
+
+            ///create vector of variable objects to pass to other functions
+            vector<variableObject> obj_caravan();
+            ///add each heapVariable to obj_caravan
+            for (string info : selected_info) {
+
+                //is this correct construction of a variable object? what does variable location refer to?
+                variableObject info_object(info, k/*line number*/);
+                obj_caravan.push_back(info_object);
+            }
+
+            ///place all variable information into the Variable Info struct
+            vector<VariableInfo> extracted_info = InfoExtractor(obj_caravan);
+
+            ///TODO: move above and below into separate helper functions
+            ///replace strings with "new" to the modified version
+            for (unsigned int m = 0; m < extracted_info; ++m) {
+                ///assemble IdHeap function
+
+            }
+
+
         }
     }
     /*for (unsigned int i = 0; i < converted_files.size(); ++i) {

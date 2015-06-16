@@ -1,12 +1,32 @@
+/*
+Authors: Ryan Lavin, Ryan O'Connor, Chatura Samarasinghe, Brian Bauer
+
+
+*/
 #include <iostream>
 #include <regex>
 #include <string>
+#include <sstream>
+
 using namespace std;
 
+
+///to string
+//From http://stackoverflow.com/questions/947621/how-do-i-convert-a-long-to-a-string-in-c
+template <class T>
+inline std::string to_string (const T& t)
+{
+    std::stringstream ss;
+    ss << t;
+    return ss.str();
+}
 
 /*Object which will hold each variable segment(eg. new var(stuff) and the position of the first character
 of each variable segment minus 1 )
 */
+
+#
+
 class variableObject{
 
 public:
@@ -26,7 +46,7 @@ public:
 		return variableLocation;
 	}
 
-	void set(){
+	void set(){///TODO: fix broken setter
 		variableObject(variableString, variableLocation);
 	}
 
@@ -37,7 +57,13 @@ private:
 	long variableLocation;
 };
 
-struct VariableInfo{
+class VariableInfo{
+public:
+    ///ctor
+    VariableInfo(){};
+    ///dtor
+    virtual ~VariableInfo(){};
+
     string variable_type;
     string variable_name;
     string ConstructorStuff;
@@ -53,7 +79,7 @@ vector<VariableInfo> InfoExtractor(vector<variableObject> ObjectCaravan){
         int equals=ObjectCaravan[k].getVariableString().find('=');
         string var_name=ObjectCaravan[k].getVariableString().substr(0, equals+1);
         for(unsigned int j=0; j<var_name.length(); j++){
-            if(var_name[j]==' ' || var_name[j]=='='){
+            if(var_name[j]==' ' || var_name[j]=='=' || var_name[j]=='*'){
                 var_name.erase(j, 1);
             }
         }
@@ -81,7 +107,7 @@ vector<VariableInfo> InfoExtractor(vector<variableObject> ObjectCaravan){
 -params - string input : single line of code
 - returns - the vector of type variableObject
 */
-vector<VariableInfo> FindHeapVariables(string input){
+vector<string> FindHeapVariables(string input){
 
 	//regex string match
 	smatch match;
@@ -135,13 +161,21 @@ vector<VariableInfo> FindHeapVariables(string input){
 
 	}
 	//testing to see whether the vector is displayed properly
-	cout << "VECTOR!!!" << endl;
+	//cout << "VECTOR!!!" << endl;
 
 	for (unsigned int vb = 0; vb < heapVarVector.size(); vb++){
 		cout << heapVarVector[vb].getVariableLocation() << "   " << heapVarVector[vb].getVariableString() << endl;
 	}
 
     vector<VariableInfo> ThePieces=InfoExtractor(heapVarVector);
-	return ThePieces;
+    vector<string> PreppedStrings;
+    string temp_numbers;
+    for(unsigned int k = 0; k<ThePieces.size(); k++){
+        temp_numbers = to_string(ThePieces[k].line_number);
+        PreppedStrings.push_back(ThePieces[k].variable_name+"="+"IdHeap<"+ThePieces[k].variable_type+">("+ThePieces[k].variable_type+
+        "("+ThePieces[k].ConstructorStuff+"),"+ThePieces[k].variable_name+",heapTags"+temp_numbers+")");
+    }
+
+	return PreppedStrings;
 }
 
